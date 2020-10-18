@@ -1,27 +1,40 @@
-function sorTarolas () {
-    tarolo.push(elsoSor)
-}
-function taroloAbrazolasa () {
-    for (let x = 0; x <= tarolo.length; x++) {
-        taroloSor = tarolo[x]
-        for (let y = 0; y <= taroloSor.length; y++) {
-            if (taroloSor[y] <= 0) {
-                led.unplot(y, 0)
-            } else {
-                led.plot(y, 0)
-            }
+function sorGenerator () {
+    for (let index = 0; index <= 4; index++) {
+        if (elsoSor[index] == 0) {
+            elsoSor[index] = randint(0, 3)
+        } else {
+            elsoSor[index] = elsoSor[index] - 1
         }
     }
 }
+function sorTarolas () {
+    tarolo[0] = elsoSor
+}
+function taroloAbrazolasa () {
+    let x: number;
+while (y <= tarolo.length - 1) {
+        taroloSor = tarolo[y]
+        x = 0
+        while (x <= taroloSor.length - 1) {
+            if (taroloSor[x] <= 0) {
+                led.unplot(x, y)
+            } else {
+                led.plot(x, y)
+            }
+            x += 1
+        }
+        y += 1
+    }
+}
 let taroloSor: number[] = []
+let y = 0
 let elsoSor: number[] = []
 let tarolo: number[][] = []
-tarolo = []
-elsoSor = [0, 1, 0, 0, 0]
+tarolo = [[0, 0, 0, 0, 0]]
+elsoSor = [0, 0, 0, 0, 0]
 basic.forever(function () {
+    sorGenerator()
     sorTarolas()
     taroloAbrazolasa()
-    while (true) {
-    	
-    }
+    basic.pause(500)
 })
